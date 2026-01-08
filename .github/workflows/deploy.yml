@@ -19,8 +19,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:arn:aws:iam::407459344216:role/ECS-Sharath-new
-          aws-region: ap-south-1
+          role-to-assume: arn:aws:iam::407459344216:role/ECS-Sharath-new
+          aws-region: ap-southeast-2
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
