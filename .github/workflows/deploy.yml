@@ -27,7 +27,7 @@ jobs:
 
       - name: Build, Tag and Push Docker Image
         run: |
-          IMAGE_URI=407459344216.dkr.ecr.ap-southeast-2.amazonaws.com/aws/myapp/my-python-app:latest
+          IMAGE_URI=407459344216.dkr.ecr.ap-southeast-2.amazonaws.com/my-python-app:latest
           docker build -t my-python-app .
           docker tag my-python-app:latest $IMAGE_URI
           docker push $IMAGE_URI
