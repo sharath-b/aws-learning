@@ -1,0 +1,33 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:arn:aws:iam::407459344216:role/ECS-Sharath-new
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, Tag and Push Docker Image
+        run: |
+          IMAGE_URI=407459344216.dkr.ecr.ap-southeast-2.amazonaws.com/aws/myapp/my-python-app:latest
+          docker build -t my-python-app .
+          docker tag my-python-app:latest $IMAGE_URI
+          docker push $IMAGE_URI
